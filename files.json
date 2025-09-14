@@ -1,7 +1,0 @@
-[
-  { "name": "Project of Doctora ( مشاريع الدوكتورا )", "path": "docs/file1.txt", "icon": "📄" },
-  { "name": "Project of Rehabilitation ( مشاريع التأهيل )", "path": "docs/file2.txt", "icon": "📝" },
-  { "name": "Project of Professor ( مشاريع البروفيسور )", "path": "docs/file3.txt", "icon": "📘" },
-  { "name": "Another Project ( مشاريع اخرى )", "path": "docs/file_1.txt", "icon": "📘" }
-  
-]
