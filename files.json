@@ -1,6 +1,6 @@
 [
-  { "name": "File 1", "path": "docs/file_1.txt", "icon": "📄" },
-  { "name": "File 2", "path": "docs/file_2.txt", "icon": "📝" },
-  { "name": "File 3", "path": "docs/file_3.txt", "icon": "📝" },
+  { "name": "File 1", "path": "docs/file_1.txt", "icon": "📄 1" },
+  { "name": "File 2", "path": "docs/file_2.txt", "icon": "📝 2" },
+  { "name": "File 3", "path": "docs/file_3.txt", "icon": "📝 3" },
   
 ]
