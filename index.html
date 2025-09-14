@@ -93,7 +93,7 @@
     }
   </style>
 </head>
-<body>
+<body class="dark-mode">
   <header>
     <h1>My Projects</h1>
     <p>Welcome! Here are my files:</p>
@@ -114,11 +114,17 @@
     </div>
   </div>
 
-  <button class="toggle-btn" onclick="toggleDarkMode()">🌙 Night Mode</button>
+  <button class="toggle-btn" onclick="toggleDarkMode()">☀️ Light Mode</button>
 
   <script>
     function toggleDarkMode() {
       document.body.classList.toggle("dark-mode");
+      let btn = document.querySelector(".toggle-btn");
+      if (document.body.classList.contains("dark-mode")) {
+        btn.textContent = "☀️ Light Mode";
+      } else {
+        btn.textContent = "🌙 Night Mode";
+      }
     }
   </script>
 </body>
