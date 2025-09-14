@@ -10,6 +10,7 @@
       color: #e5e5e5;
       margin: 0;
       padding: 0;
+      transition: background-color 0.3s, color 0.3s;
     }
 
     header {
@@ -34,7 +35,7 @@
       box-shadow: 0 4px 8px rgba(255,255,255,0.1);
       padding: 20px;
       text-align: center;
-      transition: transform 0.2s;
+      transition: transform 0.2s, background 0.3s, color 0.3s;
     }
 
     .card:hover {
@@ -53,6 +54,39 @@
     .card span {
       font-size: 40px;
     }
+
+    /* الوضع النهاري */
+    .light-mode {
+      background-color: #f5f5f5;
+      color: #222;
+    }
+
+    .light-mode .card {
+      background: white;
+      color: #222;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    }
+
+    .light-mode .card a {
+      color: #4CAF50;
+    }
+
+    .toggle-btn {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: #333;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .toggle-btn:hover {
+      background: #555;
+    }
   </style>
 </head>
 <body>
@@ -62,6 +96,8 @@
   </header>
 
   <div class="container" id="cards"></div>
+
+  <button class="toggle-btn" onclick="toggleMode()">☀️ Light Mode</button>
 
   <script>
     async function loadFiles() {
@@ -78,6 +114,16 @@
         `;
         container.appendChild(card);
       });
+    }
+
+    function toggleMode() {
+      document.body.classList.toggle("light-mode");
+      let btn = document.querySelector(".toggle-btn");
+      if (document.body.classList.contains("light-mode")) {
+        btn.textContent = "🌙 Night Mode";
+      } else {
+        btn.textContent = "☀️ Light Mode";
+      }
     }
 
     loadFiles();
