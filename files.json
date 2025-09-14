@@ -1,7 +1,7 @@
 [
-  { "name": "File 1", "path": "docs/file1.txt", "icon": "📄" },
-  { "name": "Text File 2", "path": "docs/file2.txt", "icon": "📝" },
-  { "name": "Another File", "path": "docs/file3.txt", "icon": "📘" },
-  { "name": "File_1", "path": "docs/file_1.txt", "icon": "📘" }
+  { "name": "مشاريع الدوكتورا", "path": "docs/file1.txt", "icon": "📄" },
+  { "name": "مشاريع التأهيل", "path": "docs/file2.txt", "icon": "📝" },
+  { "name": "مشاريع البروفيسور", "path": "docs/file3.txt", "icon": "📘" },
+  { "name": "مشاريع اخرى", "path": "docs/file_1.txt", "icon": "📘" }
   
 ]
