@@ -1,0 +1,5 @@
+[
+  { "name": "PDF File 1", "path": "docs/file1.pdf", "icon": "📄" },
+  { "name": "Text File 2", "path": "docs/file2.txt", "icon": "📝" },
+  { "name": "Another PDF", "path": "docs/file3.pdf", "icon": "📘" }
+]
