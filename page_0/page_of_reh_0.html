@@ -1,0 +1,72 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>مشاريع التأهيل</title>
+  <link rel="stylesheet" href="style_1.css">
+</head>
+<body>
+
+  <header>
+    <h1>📚 مشاريع التأهيل</h1>
+    <p>هنا تجد قائمة بمشاريع التأهيل مع الوصف والروابط لملفات .</p>
+  </header>
+
+  <main id="projects-container" class="cards-container">
+    <!-- البطاقات ستُنشأ أوتوماتيكياً هنا -->
+  </main>
+
+  <script>
+    // جلب المشاريع من ملف JSON
+    fetch('file_2.json')
+      .then(response => response.json())
+      .then(projects => {
+        const container = document.getElementById('projects-container');
+        projects.forEach(proj => {
+          const card = document.createElement('a');
+          card.href = proj.path;
+          card.className = 'card';
+          card.target = '_blank';
+          card.innerHTML = `
+            <div class="card-content">
+              <h2>${proj.title}</h2>
+              <p>${proj.description}</p>
+            </div>
+          `;
+          container.appendChild(card);
+        });
+      })
+      .catch(err => console.error("خطأ في تحميل المشاريع:", err));
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
