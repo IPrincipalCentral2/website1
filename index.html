@@ -1,87 +1,0 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>My Projects</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <header>
-    <h1>My Projects</h1>
-    <p>Auto-generated file list from docs/</p>
-    <a class="repo-btn" href="https://github.com/IPrincipalCentral2/website1" target="_blank">⭐ View on GitHub</a>
-  </header>
-
-
-  
-  <section class="intro">
-  <h2 class="intro-title">عن الموقع</h2>
-  <div class="intro-text">
-    
-    <p>
-
-        
-
-  
-
-اهلا .انا بلال دبوسي .
-
-انا المركزي الاساسي .
-
-
-
-هذا الموقع هو معرض لمشاريعي الشخصية. ستجد هنا ملفات نصية وتقارير  يمكن استعراضها أو تحميلها مباشرة. الهدف هو مشاركة أعمالي بشكل منظم وسهل الوصول. اهلا 
-
-
-
-
-    
-    </p>
-  </div>
-  </section>
-
-
-
-
-
-  
-  
-
-
-  
-  
-  <div class="container" id="cards"></div>
-
-  <button class="toggle-btn" onclick="toggleMode()">☀️ Light Mode</button>
-
-  <script>
-    async function loadFiles() {
-      const response = await fetch("files.json");
-      const files = await response.json();
-      const container = document.getElementById("cards");
-
-      files.forEach(file => {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.innerHTML = `
-          <span>${file.icon}</span>
-          <a href="${file.path}" target="_blank">${file.name}</a>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    function toggleMode() {
-      document.body.classList.toggle("light-mode");
-      let btn = document.querySelector(".toggle-btn");
-      if (document.body.classList.contains("light-mode")) {
-        btn.textContent = "🌙 Night Mode";
-      } else {
-        btn.textContent = "☀️ Light Mode";
-      }
-    }
-
-    loadFiles();
-  </script>
-</body>
-</html>
