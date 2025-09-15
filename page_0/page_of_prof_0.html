@@ -1,0 +1,132 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Topic of Professor </title>
+  <link rel="stylesheet" href="style_1.css">
+</head>
+<body>
+
+  <header>
+    
+    <h1> Topic of Professor ( مواضيع البروفيسور ) 📚 </h1>
+    
+    <p>هنا تجد قائمة بمواضيع البروفيسور مع الوصف وروابط تحميل الملفات.</p>
+    
+  </header>
+
+  <main id="projects-container" class="cards-container">
+    <!-- البطاقات ستُنشأ أوتوماتيكياً هنا -->
+  </main>
+
+  <script>
+    
+    
+    // جلب المواضيع من ملف JSON
+    
+    
+    fetch('file_of_Topic_2.json')
+      .then(response => response.json())
+      .then(projects => {
+        const container = document.getElementById('projects-container');
+        projects.forEach(proj => {
+          const card = document.createElement('div');
+          card.className = 'card';
+
+          card.innerHTML = `
+            <div class="card-content">
+              <h2>${proj.title}</h2>
+              <p>${proj.description}</p>
+              <div class="buttons">
+                <a href="${proj.path}" target="_blank" class="btn view">📖 View</a>
+                <a href="${proj.path}" download class="btn download">⬇️ Download</a>
+              </div>
+            </div>
+          `;
+
+          container.appendChild(card);
+        });
+      })
+      .catch(err => console.error("خطأ في تحميل الموضوع:", err));
+  </script>
+
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
