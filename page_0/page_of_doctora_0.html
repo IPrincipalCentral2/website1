@@ -1,100 +1,0 @@
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!DOCTYPE html>
-<html lang="ar">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Topic of Doctora </title>
-  <link rel="stylesheet" href="style_1.css">
-  
-</head>
-<body>
-
-  <header>
-    <h1> Topic of Doctora (مواضيع الدكتوراه) 📚 </h1>
-    <p>هنا تجد قائمة بمواضيع الدكتوراه مع الوصف وروابط تحميل الملفات.</p>
-  </header>
-
-  <!-- شريط البحث -->
-  <div class="search-bar">
-    <input type="text" id="searchInput" placeholder="ابحث عن موضوع...">
-  </div>
-
-  <main id="projects-container" class="cards-container">
-    <!-- البطاقات ستُنشأ أوتوماتيكياً هنا -->
-  </main>
-
-  <script>
-    let allProjects = []; // نخزن كل المشاريع هنا
-
-    // دالة لإنشاء البطاقات
-    function renderProjects(projects) {
-      const container = document.getElementById('projects-container');
-      container.innerHTML = ""; // مسح البطاقات السابقة
-      projects.forEach(proj => {
-        const card = document.createElement('div');
-        card.className = 'card';
-
-        card.innerHTML = `
-          <div class="card-content">
-            <h2>${proj.title}</h2>
-            <p>${proj.description}</p>
-            <div class="buttons">
-              <a href="${proj.path}" target="_blank" class="btn view">📖 View</a>
-              <a href="${proj.path}" download class="btn download">⬇️ Download</a>
-            </div>
-          </div>
-        `;
-        container.appendChild(card);
-      });
-    }
-
-    // جلب المواضيع من ملف JSON
-    fetch('file_of_Topic_1.json')
-      .then(response => response.json())
-      .then(projects => {
-        allProjects = projects; // حفظ المشاريع
-        renderProjects(allProjects); // عرض أولي
-      })
-      .catch(err => console.error("خطأ في تحميل الموضوع:", err));
-
-    // البحث عند الضغط على Enter
-    document.getElementById('searchInput').addEventListener('keypress', function(e) {
-      if (e.key === 'Enter') {
-        const keyword = e.target.value.trim();
-        if (keyword === "") {
-          renderProjects(allProjects); // لو ما كتب شيء، نعرض الكل
-        } else {
-          const filtered = allProjects.filter(proj =>
-            proj.title.includes(keyword) || proj.description.includes(keyword)
-          );
-          renderProjects(filtered);
-        }
-      }
-    });
-  </script>
-
-</body>
-</html>
-
-
-
-
-
-
