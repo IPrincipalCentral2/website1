@@ -1,0 +1,144 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Shope</title>
+  <link rel="stylesheet" href="i_style_of_work_1_i.css">  
+  
+</head>
+<body>
+
+  <header>
+    <h1> Shope </h1>
+    <p>right here . there is a space for Entreprise</p>
+  </header>
+
+  <div class="search-bar">
+    <input type="text" id="searchInput" placeholder="🔍 Search...">
+  </div>
+
+  <main id="projects-container" class="cards-container"></main>
+
+  <script>
+    // مثال بسيط: كود عام للموقع
+    const downloadCode = "12345678910"; // غيّره للكود الصحيح أو اجعله ديناميكياً
+
+    // تحميل JSON ومشاريعك
+    let allProjects = [];
+    fetch('i_file_of_work_1_i.json')
+      .then(r => r.json())
+      .then(data => { allProjects = data; displayProjects(allProjects); })
+      .catch(e => { console.error(e); document.getElementById('projects-container').innerText = "خطأ في تحميل البيانات"; });
+
+    function displayProjects(projects) {
+      const container = document.getElementById('projects-container');
+      container.innerHTML = "";
+      if (!projects.length) { container.innerHTML = "<p>❌ Nothing matches your search.</p>"; return; }
+
+      projects.forEach(proj => {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        // نضع فقط زر التحميل كـ button بدون أي href أو مسار
+        card.innerHTML = `
+          <h2>${escapeHtml(proj.title)}</h2>
+          <p>${escapeHtml(proj.description || "")}</p>
+          <div class="buttons">
+            <div class="code-box">
+              <input type="text" placeholder="🔑 Enter code" class="code-input">
+              <button class="btn unlock">Unlock ⬇️</button>
+              <button class="btn download hidden" disabled>⬇️ Download</button>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+
+        const codeInput = card.querySelector('.code-input');
+        const unlockBtn = card.querySelector('.unlock');
+        const downloadBtn = card.querySelector('.download');
+
+        // عند الضغط على Unlock: نتحقق من الكود، وإذا صحيح نفعّل التحميل
+        unlockBtn.addEventListener('click', () => {
+          const entered = (codeInput.value || "").trim();
+          // لو تريد كود خاص لكل ملف: استبدل هذا الشرط بـ (entered === proj.code)
+          if (entered === downloadCode) {
+            // ملاحظة: نضيف المسار هنا برمجياً (ليست موجودة في DOM قبل التحقق)
+            downloadBtn.dataset.path = proj.path; // path محفوظ في متغير proj لكن ليس في DOM سابقًا
+            downloadBtn.disabled = false;
+            downloadBtn.classList.remove('hidden');
+            alert("✅ الكود صحيح. اضغط Download لبدء التحميل.");
+          } else {
+            alert("❌ الكود خطأ، حاول مرة أخرى.");
+          }
+        });
+
+        // عند الضغط Download: نُنشئ رابطًا مؤقتًا وننقره برمجياً
+        downloadBtn.addEventListener('click', () => {
+          const filePath = downloadBtn.dataset.path;
+          if (!filePath) return alert("خطأ: مسار الملف غير متوفر.");
+          // إنشاء عنصر <a> مؤقت لتنزيل الملف
+          const a = document.createElement('a');
+          a.href = filePath;
+          // حاول استخراج اسم الملف للـ download attribute
+          const parts = filePath.split('/');
+          a.download = parts[parts.length - 1] || '';
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        });
+      });
+    }
+
+    // وظيفة بسيطة للهروب من HTML عند إخراج النصوص
+    function escapeHtml(text) {
+      return String(text)
+        .replaceAll('&','&amp;')
+        .replaceAll('<','&lt;')
+        .replaceAll('>','&gt;')
+        .replaceAll('"','&quot;')
+        .replaceAll("'",'&#039;');
+    }
+
+    // وظيفة للبحث
+    document.getElementById("searchInput").addEventListener("keypress", function(event) {
+      if (event.key === "Enter") {
+        const keyword = event.target.value.toLowerCase();
+        const filtered = allProjects.filter(proj =>
+          (proj.title || "").toLowerCase().includes(keyword) ||
+          (proj.description || "").toLowerCase().includes(keyword)
+        );
+        displayProjects(filtered);
+      }
+    });
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
