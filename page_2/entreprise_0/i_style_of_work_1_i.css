@@ -1,0 +1,156 @@
+body {
+  font-family: Arial, sans-serif;
+  background-color: #121212;
+  color: #eee;
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
+
+header {
+  padding: 20px;
+  background: #1f1f1f;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.5);
+}
+
+header h1 {
+  margin: 0;
+  font-size: 1.8em;
+}
+
+header p {
+  margin: 10px 0 0;
+  font-size: 1em;
+  color: #bbb;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 20px;
+  gap: 15px;
+}
+
+.card {
+  width: 260px;
+  background: #1e1e1e;
+  border-radius: 12px;
+  padding: 20px;
+  color: #fff;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.6);
+}
+
+.card-content h2 {
+  font-size: 1.2em;
+  margin-bottom: 10px;
+  color: #90caf9;
+}
+
+.card-content p {
+  font-size: 0.95em;
+  color: #ccc;
+  margin-bottom: 15px;
+}
+
+
+
+
+
+
+
+
+.buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+.btn {
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 0.9em;
+  background: #4CAF50; /* أخضر فاتح */
+  color: #fff;
+  transition: background 0.3s, box-shadow 0.3s;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+.btn:hover {
+  background: #66BB6A; /* أخضر أفتح عند التمرير */
+  box-shadow: 0 4px 12px rgba(102, 187, 106, 0.6);
+}
+
+.view {
+  background: #4CAF50;
+}
+
+.download {
+  background: #4CAF50;
+}
+
+
+
+
+
+/* شريط البحث */
+.search-bar {
+  text-align: center;
+  margin: 20px;
+}
+
+.search-bar input {
+  padding: 10px;
+  width: 60%;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.hidden { display: none; }
+.card { border: 1px solid #e0e0e0; padding: 12px; margin: 10px 0; border-radius: 8px; }
+.buttons { margin-top: 8px; }
+
+.btn {
+  padding: 8px 14px;
+  border: none;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  color: #fff;
+  transition: 0.2s;
+  display: inline-block;
+  margin: 4px;
+}
+.unlock { background: #f39c12; }
+.unlock:hover { opacity: 0.9; }
+.download { background: #27ae60; }
+.download[disabled] { opacity: 0.5; cursor: not-allowed; }
+.code-input { padding: 6px; border: 1px solid #ccc; border-radius: 6px; }
+
+
+
+
+
+
+
