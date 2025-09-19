@@ -1,0 +1,12 @@
+[
+    { "name": "Topic of Doctora ( مواضيع الدوكتورا )", "path": "page_0/page_of_doctora_0.html", "icon": "📄" },
+    { "name": "Topic of startup ( مواضيع مؤسسات ناشئة )", "path": "page_0/page_of_startup_0.html", "icon": "📝" },
+    { "name": "Book ( كتب )", "path": "page_0/page_of_book_0.html", "icon": "📘" },
+    { "name": "Another Topic ( مواضيع اخرى )", "path": "page_0/page_of_another_topic_0.html", "icon": "📘" },
+    { "name": "Programs", "path": "page_1/page_of_work_0.html", "icon": "🛠️" },
+    
+    { "name": "entreprise", "path": "page_2/i_space_for_company_0_i.html", "icon": "🛠️" }
+    
+  
+]
+
