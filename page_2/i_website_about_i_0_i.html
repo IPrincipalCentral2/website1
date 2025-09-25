@@ -1,0 +1,149 @@
+
+
+
+
+
+
+
+
+
+<!--
+
+
+    
+    
+    i am i . i am principal-central . i am Billal Debouci .
+    
+    i have a diploma of ComputerScience .
+    
+    i am here in a country named : Algeria in Ouargla in Ouargla .
+    
+    i am in a planet called : Earth .
+    
+    i am near a star called : Sun .
+    
+    i am in a galaxy called : Milky-Way .
+    
+     
+    
+    
+    
+    
+
+
+
+
+
+
+
+-->
+
+
+
+
+
+<!-- index.html -->
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Billal Debouci — Personal Page</title>
+  <link rel="stylesheet" href="i_styles_1_i.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="card header">
+      <h1 class="name">principal-central </h1>
+      <p class="subtitle">i am i · i am principal-central . i am Billal Debouci</p>
+    </header>
+
+    <section class="card info">
+      <ul class="facts">
+        <li class="fact">
+          <span class="marker" aria-hidden="true">★</span>
+          <div class="text">i am i . i am principal-central . i am Billal Debouci .</div>
+        </li>
+
+        <li class="fact">
+          <span class="marker" aria-hidden="true">🎓</span>
+          <div class="text">i have a diploma of ComputerScience .</div>
+        </li>
+
+        <li class="fact">
+          <span class="marker" aria-hidden="true">📍</span>
+          <div class="text">i am here in a country named : Algeria in Ouargla in Ouargla .</div>
+        </li>
+
+        <li class="fact">
+          <span class="marker" aria-hidden="true">🌍</span>
+          <div class="text">i am in a planet called : Earth .</div>
+        </li>
+
+        <li class="fact">
+          <span class="marker" aria-hidden="true">☀️</span>
+          <div class="text">i am near a star called : Sun .</div>
+        </li>
+
+        <li class="fact">
+          <span class="marker" aria-hidden="true">🌌</span>
+          <div class="text">i am in a galaxy called : Milky-Way .</div>
+        </li>
+      </ul>
+    </section>
+
+    <footer class="card footer">
+      <small>Made with care — keep breathing. ✨</small>
+    </footer>
+  </main>
+    
+    
+    
+    <section class="card info">
+      <h2 class="subtitle">Units (from JSON)</h2>
+      <pre id="units-box"></pre>
+    </section>
+    
+    <script>
+      // العدد الضخم ثابت
+      const BIG_AMOUNT =
+        "10_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000_000";
+    
+      fetch("units.json")
+        .then(res => res.json())
+        .then(data => {
+          const box = document.getElementById("units-box");
+          let output = "";
+    
+          data.forEach(unit => {
+            const name = unit.name_of_unity;
+    
+            // أربع صيغ لكل اسم
+            const variations = [
+              name,
+              `the quality of ${name}`,
+              `[[${name.replace(/\[|\]/g, "")}]-s]`, // يحول [pleasure] → [[pleasure]-s]
+              `the quality of [[${name.replace(/\[|\]/g, "")}]-s]`
+            ];
+    
+            variations.forEach(v => {
+              output += `name_of_unity : "${v}" \n\n    amount : "${BIG_AMOUNT}" \n\n`;
+            });
+          });
+    
+          box.textContent = output;
+        })
+        .catch(err => console.error("Error:", err));
+    </script>
+    
+    
+    
+    
+  
+</body>
+</html>
+
+
+
+
