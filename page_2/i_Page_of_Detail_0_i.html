@@ -1,0 +1,147 @@
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Finance Tracker</title>
+  <link rel="stylesheet" href="i_styles_2_i.css">
+</head>
+<body>
+
+  <!-- المداخيل -->
+  <div class="table-wrapper">
+    <h2>💰 Money Enter</h2>
+    <div class="account-total" id="enter-accounts"></div> <!-- مجاميع الحسابات -->
+    <div class="total" id="enter-total">Total: </div>
+    <div class="table-container">
+      <table id="enter-table">
+        <thead>
+          <tr>
+            <th>Account</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- المصاريف -->
+  <div class="table-wrapper">
+    <h2>💸 Depances</h2>
+    <div class="account-total" id="depance-accounts"></div> <!-- مجاميع الحسابات -->
+    <div class="total" id="depance-total">Total: </div>
+    <div class="table-container">
+      <table id="depance-table">
+        <thead>
+          <tr>
+            <th>Account</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // تحميل بيانات JSON
+    async function loadData(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("HTTP error " + res.status);
+        return await res.json();
+      } catch (err) {
+        console.error("خطأ في تحميل الملف:", url, err);
+        return [];
+      }
+    }
+
+    // عرض جدول مع حساب المجموع لكل عملة + حساب
+    function renderTable(data, tableId, totalId, accountId) {
+      const tbody = document.querySelector(`#${tableId} tbody`);
+      tbody.innerHTML = "";
+      const totals = {};       // مجموع العملات
+      const accountTotals = {}; // مجموع الحسابات
+
+      // نعرض البيانات من الأسفل للأعلى
+      data.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${item.name_of_account}</td>
+          <td>${item.description}</td>
+          <td>${item.amount}</td>
+          <td>${item.currency}</td>
+          <td>${item.date}</td>
+        `;
+        tbody.appendChild(tr);
+
+        // حساب المجموع لكل عملة
+        if (!totals[item.currency]) totals[item.currency] = 0;
+        totals[item.currency] += parseFloat(item.amount);
+
+        // حساب المجموع لكل حساب
+        if (!accountTotals[item.name_of_account]) accountTotals[item.name_of_account] = 0;
+        accountTotals[item.name_of_account] += parseFloat(item.amount);
+      });
+
+      // إظهار مجموع العملات
+      let totalText = "Total: ";
+      for (const [currency, sum] of Object.entries(totals)) {
+        totalText += `${sum} ${currency} | `;
+      }
+      document.getElementById(totalId).textContent = totalText.replace(/\|\s*$/, "");
+
+      // إظهار مجموع الحسابات
+      let accountText = "Accounts Totals: ";
+      for (const [account, sum] of Object.entries(accountTotals)) {
+        accountText += `${account}: ${sum} | `;
+      }
+      document.getElementById(accountId).textContent = accountText.replace(/\|\s*$/, "");
+    }
+
+    // تشغيل
+    async function init() {
+      const moneyEnter = await loadData("i_money_enter_0_i.json");
+      const depances = await loadData("i_depance_0_i.json");
+
+      renderTable(moneyEnter, "enter-table", "enter-total", "enter-accounts");
+      renderTable(depances, "depance-table", "depance-total", "depance-accounts");
+    }
+
+    init();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
