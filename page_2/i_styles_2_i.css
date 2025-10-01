@@ -1,0 +1,74 @@
+
+
+
+
+
+
+
+
+
+
+
+
+body {
+  display: flex;
+  justify-content: space-between;
+  background: #111827;
+  color: #f1f5f9;
+  font-family: sans-serif;
+  padding: 20px;
+}
+.table-wrapper {
+  width: 45%;
+}
+.table-container {
+  display: flex;
+  flex-direction: column-reverse; /* يطبق فقط على الجدول */
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 10px;
+  background: #1f2937;
+  max-height: 400px;
+  overflow-y: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 8px;
+  border-bottom: 1px solid #333;
+  text-align: center;
+}
+th {
+  background: #2563eb;
+  color: #fff;
+}
+.total {
+  font-weight: bold;
+  background: #374151;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
