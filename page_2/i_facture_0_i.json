@@ -1,0 +1,70 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  
+  "invoice_number": "2025-001",
+  
+  "date": "2025-10-01",
+  
+  "company": {
+    "name": "Tech Solutions SARL",
+    "address": "Rue 123, Alger, Algeria",
+    "phone": "+213 555 123 456",
+    "email": "contact@techsolutions.dz"
+  },
+  
+  
+  "client": {
+    "name": "Bilal Benali",
+    "address": "Avenue 45, Oran, Algeria"
+  },
+  
+  
+  "items": [
+    
+    {
+      "description": "Laptop Dell XPS 15",
+      "quantity": 1,
+      "unit_price": 250000
+    
+    },
+    
+    {
+      "description": "Wireless Mouse",
+      "quantity": 2,
+      "unit_price": 3000
+    }
+  
+  ],
+  
+  "currency": "DZD"
+  
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
