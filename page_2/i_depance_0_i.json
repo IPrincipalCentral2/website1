@@ -1,0 +1,38 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[
+    
+    
+    { "name_of_account" : "account_of_flexy" , "description": "Groceries", "amount": 150, "currency": "EUR", "date": "2025/09/02" },
+    
+    { "name_of_account" : "account_of_flexy" , "description": "Transport", "amount": 300, "currency": "DZD", "date": "2025/09/06" },
+    
+    { "name_of_account" : "account_of_flexy" , "description": "Electricity Bill", "amount": 100, "currency": "USD", "date": "2025/09/12" }
+    
+    
+    
+]
+
+
+
+
+
+
+
+
+
+
