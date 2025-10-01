@@ -1,0 +1,166 @@
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Finance Tracker</title>
+  <link rel="stylesheet" href="i_styles_2_i.css">
+</head>
+<body>
+
+  <h2>📊 Accounts Balances</h2>
+  <div id="accounts-balances"></div>
+
+  <!-- المداخيل -->
+  <div class="table-wrapper">
+    <h2>💰 Money Enter</h2>
+    <div class="table-container">
+      <table id="enter-table">
+        <thead>
+          <tr>
+            <th>Account</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- المصاريف -->
+  <div class="table-wrapper">
+    <h2>💸 Depances</h2>
+    <div class="table-container">
+      <table id="depance-table">
+        <thead>
+          <tr>
+            <th>Account</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <script>
+    // تحميل بيانات JSON
+    async function loadData(url) {
+      try {
+        const res = await fetch(url);
+        if (!res.ok) throw new Error("HTTP error " + res.status);
+        return await res.json();
+      } catch (err) {
+        console.error("خطأ في تحميل الملف:", url, err);
+        return [];
+      }
+    }
+
+    // عرض جدول العمليات
+    function renderTable(data, tableId) {
+      const tbody = document.querySelector(`#${tableId} tbody`);
+      tbody.innerHTML = "";
+
+      data.forEach(item => {
+        const tr = document.createElement("tr");
+        tr.innerHTML = `
+          <td>${item.name_of_account}</td>
+          <td>${item.description}</td>
+          <td>${item.amount}</td>
+          <td>${item.currency}</td>
+          <td>${item.date}</td>
+        `;
+        tbody.appendChild(tr);
+      });
+    }
+
+    // حساب أرصدة الحسابات (إجمالي الدخول - إجمالي الخروج)
+    function calculateBalances(entries, depances) {
+      const balances = {};
+
+      // أضف المداخيل
+      entries.forEach(item => {
+        const acc = item.name_of_account;
+        const curr = item.currency;
+        if (!balances[acc]) balances[acc] = {};
+        if (!balances[acc][curr]) balances[acc][curr] = 0;
+        balances[acc][curr] += parseFloat(item.amount);
+      });
+
+      // أطرح المصاريف
+      depances.forEach(item => {
+        const acc = item.name_of_account;
+        const curr = item.currency;
+        if (!balances[acc]) balances[acc] = {};
+        if (!balances[acc][curr]) balances[acc][curr] = 0;
+        balances[acc][curr] -= parseFloat(item.amount);
+      });
+
+      return balances;
+    }
+
+    // عرض الأرصدة
+    function renderBalances(balances) {
+      const container = document.getElementById("accounts-balances");
+      container.innerHTML = "";
+
+      for (const [account, currencies] of Object.entries(balances)) {
+        let text = `${account} → `;
+        for (const [curr, sum] of Object.entries(currencies)) {
+          text += `${sum} ${curr} | `;
+        }
+        text = text.replace(/\|\s*$/, ""); // إزالة الفاصل الأخير
+
+        const div = document.createElement("div");
+        div.textContent = text;
+        container.appendChild(div);
+      }
+    }
+
+    // تشغيل
+    async function init() {
+      const moneyEnter = await loadData("i_money_enter_0_i.json");
+      const depances = await loadData("i_depance_0_i.json");
+
+      // عرض العمليات
+      renderTable(moneyEnter, "enter-table");
+      renderTable(depances, "depance-table");
+
+      // حساب و عرض الأرصدة
+      const balances = calculateBalances(moneyEnter, depances);
+      renderBalances(balances);
+    }
+
+    init();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
