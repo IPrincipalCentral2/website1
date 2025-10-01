@@ -1,0 +1,33 @@
+
+
+
+
+
+
+
+
+
+
+
+
+[
+    
+    
+    { "description": "Salary", "amount": 500, "currency": "EUR", "date": "2025/09/01" },
+    
+    { "description": "Freelance Project", "amount": 200, "currency": "USD", "date": "2025/09/05" },
+    
+    { "description": "Gift", "amount": 1000, "currency": "DZD", "date": "2025/09/10" }
+    
+    
+]
+
+
+
+
+
+
+
+
+
+
