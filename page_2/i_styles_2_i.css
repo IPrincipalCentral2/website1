@@ -1,0 +1,104 @@
+
+
+
+
+
+
+
+
+
+
+/* نخلي الجسم (body) مقسوم 3 أعمدة */
+body {
+  display: grid;
+  grid-template-columns: 35% 30% 30%; /* العمود الأول أعرض */
+  gap: 20px;
+  background: #111827;
+  color: #f1f5f9;
+  font-family: sans-serif;
+  padding: 20px;
+}
+
+/* تنسيق صندوق الأرصدة */
+#balances-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: #1f2937;
+  border: 1px solid #444;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+#balances-table th, 
+#balances-table td {
+  padding: 10px;
+  border-bottom: 1px solid #333;
+  text-align: center;
+}
+
+#balances-table th {
+  background: #10b981; /* أخضر للتفريق عن الجداول الأخرى */
+  color: #fff;
+  font-size: 16px;
+}
+
+#balances-table td {
+  font-size: 15px;
+  font-weight: bold;
+  color: #facc15; /* أصفر لعرض الأرصدة */
+}
+
+/* باقي الجداول */
+.table-wrapper {
+  width: 100%;
+}
+.table-container {
+  display: flex;
+  flex-direction: column-reverse;
+  border: 1px solid #444;
+  border-radius: 10px;
+  padding: 10px;
+  background: #1f2937;
+  max-height: 400px;
+  overflow-y: auto;
+}
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th, td {
+  padding: 8px;
+  border-bottom: 1px solid #333;
+  text-align: center;
+}
+th {
+  background: #2563eb;
+  color: #fff;
+}
+.total {
+  font-weight: bold;
+  background: #374151;
+  padding: 10px;
+  margin-top: 10px;
+  border-radius: 6px;
+}
+h2 {
+  text-align: center;
+  margin-bottom: 10px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
