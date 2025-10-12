@@ -1,0 +1,79 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  "invoice_number": "2025-306",
+  "date": "2025/10/12",
+
+  "company": {
+    "name": "IEntreprise0I Entreprise individual",
+    "address": "Ouargla, Algeria",
+    "phone": "+213 561 577 437",
+    "email": "deboubil24@gmail.com"
+  },
+
+  "client": {
+    "name": "Steve Arnault",
+    "address": "Paris , France"
+  },
+
+  "items": [
+    {
+      "description": "Vbox Marcketing",
+      "quantity": 1,
+      "unit_price": 2
+    },
+    {
+      "description": "Publicity",
+      "quantity": 62.47,
+      "unit_price": 1
+    },
+    {
+      "description": "Control Browzering",
+      "quantity": 1,
+      "unit_price": 4
+    }
+  ],
+
+  "currency": "EUR",
+
+  "transfer_request": {
+    "from_currency": "DZD",
+    "to_currency": "EUR",
+    "exchange_rate": 136.94,
+    "reason": "تسديد الفاتورة رقم 2025-306"
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
