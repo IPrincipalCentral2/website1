@@ -1,0 +1,398 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>السيرة الذاتية ومشروع شخصي</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    
+    
+    
+    body {
+      font-family: "Cairo", Arial, sans-serif;
+      margin: 40px;
+      transition: background 0.3s, color 0.3s;
+      line-height: 1.7;
+    }
+
+    body.light {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    body.dark {
+      background: #1e293b;
+      color: #f1f5f9;
+    }
+
+    .page {
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      padding: 30px;
+      margin: auto;
+      max-width: 800px;
+      background: inherit;
+      color: inherit;
+      box-shadow: 0 0 8px rgba(0,0,0,0.1);
+    }
+
+    h1, h2, h3 {
+      text-align: center;
+      margin: 10px 0;
+    }
+
+    h1 {
+      color: #10b981;
+    }
+
+    h2 {
+      color: #2563eb;
+    }
+
+    .section {
+      margin-top: 25px;
+    }
+
+    ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    ul li::before {
+      content: "• ";
+      color: #10b981;
+    }
+
+    .actions {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 5px;
+    }
+
+    .btn-toggle {
+      background: #3b82f6;
+      color: white;
+    }
+
+    .btn-print {
+      background: #10b981;
+      color: white;
+    }
+
+    @media print {
+      .actions {
+        display: none;
+      }
+      .page {
+        box-shadow: none;
+        border: none;
+      }
+      .page {
+        page-break-after: always;
+      }
+    }
+
+    .signature {
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .signature img {
+      width: 180px;
+      opacity: 0.9;
+      margin-top: 10px;
+      filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3));
+    }
+
+    .contact-info {
+      text-align: center;
+      font-size: 15px;
+      margin-bottom: 15px;
+    }
+
+    .contact-info p {
+      margin: 5px 0;
+    }
+
+    .project-box {
+      background: rgba(16,185,129,0.05);
+      border: 1px solid #10b981;
+      border-radius: 8px;
+      padding: 20px;
+      margin-top: 15px;
+    }
+    
+    
+    
+    @page {
+      size: A4;
+      margin: 20mm;
+      @bottom-center {
+        content: "page : " counter(page) " of " counter(pages);
+        font-size: 12px;
+        color: #555;
+      }
+    }
+    
+    body {
+      counter-reset: page;
+    }
+    
+    
+    
+    
+    
+    
+    
+  </style>
+</head>
+<body class="light">
+  <div class="actions">
+    <button class="btn-toggle" onclick="toggleMode()">🌙/☀️ تبديل الوضع</button>
+    <button class="btn-print" onclick="window.print()">🖨️ طباعة / PDF</button>
+  </div>
+
+  <!-- الصفحة الأولى: السيرة الذاتية -->
+  <div class="page">
+    <h1>السيرة الذاتية</h1>
+
+    <div class="contact-info">
+      <p><b>الاسم:</b> بلال دبوسي</p>
+      <p><b>e_mail :</b> deboubil24@gmail.com</p>
+      <p><b>phone :</b> 0561577437</p>
+      <p><b>العنوان:</b> الجزائر ورقلة ورقلة</p>
+    </div>
+
+    <div class="section">
+      <h2>الملف الشخصي</h2>
+      <p>
+        مطور برمجيات يتمتع بخبرة في تطوير تطبيقات سطح المكتب باستخدام Python و PyQt5، 
+        بالإضافة إلى شغف بابتكار حلول تقنية تسهّل الحياة اليومية وتعزز الكفاءة.
+      </p>
+    </div>
+
+    <div class="section">
+      <h2>الخبرات العملية</h2>
+      <ul>
+        <li><b>مطور برامج حر</b> – تصميم وبرمجة أدوات الإنتاجية (2020–الآن)</li>
+        <li><b>مشرف مشروع</b> – أنظمة أتمتة القلاحة ( Agriculture with Robotic )</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>المهارات التقنية</h2>
+      <ul>
+        <li>Python / C / C++ / HTML / CSS / JavaScript</li>
+        <li>PyQt5، OpenGL، Linux، Git</li>
+        <li>تحليل البيانات وتصميم واجهات المستخدم</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>التعليم</h2>
+      <ul>
+        <li> شهادة في الإعلام الآلي – جامعة الجزائر </li>
+      </ul>
+    </div>
+
+    <div class="signature">
+      <p><b>بلال دبوسي</b></p>
+      <img src="stamp.png" alt="ختم بلال دبوسي">
+    </div>
+  </div>
+
+    <!-- الصفحة الثانية: مشروع معين -->
+    
+    
+    <div class="page">
+      <h1>مشروع: أنظمة أتمتة الفلاحة (Agriculture with Robotics)</h1>
+    
+      <div class="project-box">
+        <h2>نبذة عن المشروع</h2>
+        <p>
+          يهدف هذا المشروع إلى تطوير نظام متكامل يعتمد على الروبوتات وأجهزة التحسس 
+          لتحسين كفاءة العمليات الزراعية في البيئات الصحراوية.  
+          يقوم النظام بمراقبة التربة والرطوبة والحرارة، والتحكم الآلي في الريّ والأسمدة، 
+          مع إمكانية اتخاذ قرارات ذكية عبر تحليل البيانات بالذكاء الاصطناعي.
+        </p>
+      </div>
+    
+      <div class="project-box">
+        <h2>الأهداف التقنية</h2>
+        <ul>
+          <li>تطوير روبوتات ذكية قادرة على التنقل في الحقول وتنفيذ المهام الزراعية الدقيقة.</li>
+          <li>تصميم شبكة تحسس لاسلكية تتابع حالة النباتات والتربة في الزمن الحقيقي.</li>
+          <li>إنشاء نظام تحكم مركزي يعتمد على الذكاء الاصطناعي لتحليل البيانات واتخاذ القرارات.</li>
+          <li>دمج النظام مع بوابة ويب ولوحة مراقبة تفاعلية لمتابعة المزرعة عن بُعد.</li>
+        </ul>
+      </div>
+    
+      <div class="project-box">
+        <h2>الجانب البيئي والاقتصادي</h2>
+        <p>
+          يسعى المشروع إلى تقليل استهلاك المياه بنسبة تصل إلى 40٪ من خلال أنظمة ري ذكية،  
+          كما يهدف إلى خفض التكاليف التشغيلية للمزارعين عبر الأتمتة وتقليل الاعتماد على اليد العاملة،  
+          مع ضمان استدامة الإنتاج في المناطق الجافة.
+        </p>
+      </div>
+    
+      <div class="project-box">
+        <h2>الجانب الفلسفي والفكري</h2>
+        <p>
+          هذه المبادرة ليست مجرد مشروع تقني، بل محاولة لإعادة تعريف علاقة الإنسان بالأرض.  
+          فالفلاحة الذكية تمثل توازنًا بين الإبداع البشري والطبيعة — بين الفهم العلمي والإحساس الإنساني.  
+          إنها رؤية لمستقبلٍ يزرع فيه الإنسان الأرض بعقله قبل يديه.
+        </p>
+      </div>
+    
+      <div class="signature">
+        <p><b>بلال دبوسي</b></p>
+        <img src="stamp.png" alt="ختم بلال دبوسي">
+      </div>
+    </div>
+    
+    
+    
+  
+  
+  
+
+  <script>
+    function toggleMode() {
+      document.body.classList.toggle("dark");
+      document.body.classList.toggle("light");
+    }
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
