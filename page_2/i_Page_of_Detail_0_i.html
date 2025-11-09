@@ -1,0 +1,266 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tracker of Finance </title>
+  <link rel="stylesheet" href="i_styles_2_i.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+  <h2>📊 Accounts Balances</h2>
+  <table id="balances-table">
+    <thead>
+      <tr>
+        <th>Account</th>
+        <th>Balances</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <!-- المداخيل -->
+  <div class="table-wrapper">
+    <h2>💰 Money Enter</h2>
+    <div class="table-container">
+      <table id="enter-table">
+        <thead>
+          <tr>
+            <th>Account</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- المصاريف -->
+  <div class="table-wrapper">
+    <h2>💸 Depances</h2>
+    <div class="table-container">
+      <table id="depance-table">
+        <thead>
+          <tr>
+            <th>Account</th>
+            <th>Description</th>
+            <th>Amount</th>
+            <th>Currency</th>
+            <th>Date</th>
+          </tr>
+        </thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- الرسوم البيانية -->
+  <div class="charts-section">
+    <h2>📈 Charts Per Account</h2>
+    <div id="charts-container"></div>
+  </div>
+    
+    
+    
+<script>
+  // تحميل بيانات JSON
+  async function loadData(url) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) throw new Error("HTTP error " + res.status);
+      return await res.json();
+    } catch (err) {
+      console.error("خطأ في تحميل الملف:", url, err);
+      return [];
+    }
+  }
+
+  // عرض جدول
+  function renderTable(data, tableId) {
+    const tbody = document.querySelector(`#${tableId} tbody`);
+    tbody.innerHTML = "";
+    data.forEach(item => {
+      const tr = document.createElement("tr");
+      tr.innerHTML = `
+        <td>${item.name_of_account}</td>
+        <td>${item.description}</td>
+        <td>${item.amount}</td>
+        <td>${item.currency}</td>
+        <td>${item.date}</td>
+      `;
+      tbody.appendChild(tr);
+    });
+  }
+
+  // حساب الأرصدة
+  function calculateBalances(entries, depances) {
+    const balances = {};
+    entries.forEach(item => {
+      const acc = item.name_of_account;
+      const curr = item.currency;
+      if (!balances[acc]) balances[acc] = {};
+      if (!balances[acc][curr]) balances[acc][curr] = 0;
+      balances[acc][curr] += parseFloat(item.amount);
+    });
+    depances.forEach(item => {
+      const acc = item.name_of_account;
+      const curr = item.currency;
+      if (!balances[acc]) balances[acc] = {};
+      if (!balances[acc][curr]) balances[acc][curr] = 0;
+      balances[acc][curr] -= parseFloat(item.amount);
+    });
+    return balances;
+  }
+
+  function renderBalances(balances) {
+    const tbody = document.querySelector("#balances-table tbody");
+    tbody.innerHTML = "";
+    for (const [account, currencies] of Object.entries(balances)) {
+      let balancesText = "";
+      for (const [curr, sum] of Object.entries(currencies)) {
+        balancesText += `${sum} ${curr} | `;
+      }
+      balancesText = balancesText.replace(/\|\s*$/, "");
+      const tr = document.createElement("tr");
+      tr.innerHTML = `<td><b>${account}</b></td><td>${balancesText}</td>`;
+      tbody.appendChild(tr);
+    }
+  }
+
+  // 🎯 عرض الرسوم البيانية بشكل صحيح لكل عملة
+  function renderCharts(entries, depances) {
+    const container = document.getElementById("charts-container");
+    container.innerHTML = "";
+
+    const allTransactions = [
+      ...entries.map(t => ({...t, type:"entry"})),
+      ...depances.map(t => ({...t, type:"depance"}))
+    ];
+
+    // تجميع حسب الحساب والعملة
+    const accountsData = {};
+    allTransactions.forEach(item => {
+      const acc = item.name_of_account;
+      const curr = item.currency;
+      if (!accountsData[acc]) accountsData[acc] = {};
+      if (!accountsData[acc][curr]) accountsData[acc][curr] = [];
+      const amount = parseFloat(item.amount) * (item.type === "entry" ? 1 : -1);
+      accountsData[acc][curr].push({date: item.date, amount});
+    });
+
+    // ألوان
+    const colorPalette = {
+      "USD": "#3b82f6",
+      "EUR": "#10b981",
+      "DZD": "#facc15",
+      "GBP": "#ef4444",
+      "OTHER": "#a855f7"
+    };
+
+    for (const [account, currencies] of Object.entries(accountsData)) {
+      // 🟢 عنوان الحساب
+      const title = document.createElement("h3");
+      title.textContent = `📌 ${account}`;
+      title.className = "chart-title";
+      container.appendChild(title);
+
+      const canvas = document.createElement("canvas");
+      container.appendChild(canvas);
+
+      // 1️⃣ كل التواريخ الموحدة
+      let allDates = new Set();
+      for (const transactions of Object.values(currencies)) {
+        transactions.forEach(t => allDates.add(t.date));
+      }
+      allDates = Array.from(allDates).sort((a,b) => new Date(a) - new Date(b));
+
+      const datasets = [];
+      for (const [curr, transactions] of Object.entries(currencies)) {
+        // ترتيب عمليات العملة
+        transactions.sort((a,b) => new Date(a.date) - new Date(b.date));
+        
+        // 2️⃣ حساب الرصيد التراكمي لكل تاريخ
+        let cumulative = 0;
+        const dataSeries = [];
+        let idx = 0;
+        for (const date of allDates) {
+          while (idx < transactions.length && transactions[idx].date === date) {
+            cumulative += transactions[idx].amount;
+            idx++;
+          }
+          dataSeries.push(cumulative);
+        }
+
+        datasets.push({
+          label: `${curr}`,
+          data: dataSeries,
+          borderColor: colorPalette[curr] || colorPalette["OTHER"],
+          backgroundColor: (colorPalette[curr] || colorPalette["OTHER"]) + "33",
+          fill: true,
+          tension: 0.4,
+          pointRadius: 3
+        });
+      }
+
+      new Chart(canvas, {
+        type: "line",
+        data: { labels: allDates, datasets },
+        options: {
+          responsive: true,
+          plugins: { legend: { labels: { color: "#f1f5f9" } } },
+          scales: {
+            x: { ticks: { color: "#f1f5f9" }, grid: { color: "#374151" } },
+            y: { ticks: { color: "#f1f5f9" }, grid: { color: "#374151" } }
+          }
+        }
+      });
+    }
+  }
+
+  async function init() {
+    const moneyEnter = await loadData("i_money_enter_0_i.json");
+    const depances = await loadData("i_depance_0_i.json");
+    renderTable(moneyEnter, "enter-table");
+    renderTable(depances, "depance-table");
+    const balances = calculateBalances(moneyEnter, depances);
+    renderBalances(balances);
+    renderCharts(moneyEnter, depances);
+  }
+  init();
+</script>
+    
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
