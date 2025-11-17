@@ -1,0 +1,92 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{
+  "invoice_number": "2025-343",
+  "date": "2025/11/17",
+
+  "company": {
+    "name": "Billal Debouci Entreprise individual",
+    "address": "Ouargla, Algeria",
+    "phone": "+213 561 577 437",
+    "email": "deboubil24@gmail.com"
+  },
+
+  "client": {
+    "name": "Bilal Benali",
+    "address": "Oran , Algeria"
+  },
+
+  "items": [
+    {
+      "description": "Vbox Marcketing",
+      "quantity": 1,
+      "unit_price": 2
+    },
+    {
+      "description": "Acces to Cloud",
+      "quantity": 4.00299999999989,
+      "unit_price": 1
+    },
+    {
+      "description": "Control Browzering",
+      "quantity": 1,
+      "unit_price": 4
+    }
+  ],
+
+  "currency": "USD",
+    
+    
+    
+    "transfer_request": {
+        
+        "from_currency": "EUR",
+        "to_currency": "USD",
+        "exchange_rate": 0.86,
+        "reason": "تسديد الفاتورة رقم 2025-343",
+        "from_rib": "00100 946 0310 000 040/26",
+        "to_rib": "account_USD"
+        
+   
+    }
+    
+    
+    
+  
+  
+  
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
