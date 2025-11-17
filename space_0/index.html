@@ -1,0 +1,301 @@
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>فاتورة رسمية</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 40px;
+      transition: background 0.3s, color 0.3s;
+      line-height: 1.6;
+    }
+
+    body.light {
+      background: #ffffff;
+      color: #000000;
+    }
+
+    body.dark {
+      background: #1e293b;
+      color: #f1f5f9;
+    }
+
+    .invoice-box, .transfer-box {
+      border: 1px solid #ddd;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 800px;
+      margin: auto;
+      background: inherit;
+      color: inherit;
+    }
+    
+    
+    h1 {
+        text-align: center;   /* يجعل النص في الوسط */
+        color: green;         /* يغير اللون */
+    }
+    
+    
+    h2, h3 {
+      margin: 5px 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+
+    table, th, td {
+      border: 1px solid #999;
+      padding: 10px;
+      text-align: left;
+    }
+
+    th {
+      background: #ddd;
+      color: #000;
+    }
+
+    .dark th {
+      background: #334155;
+      color: #f1f5f9;
+    }
+
+    .total {
+      text-align: right;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    .actions {
+      text-align: center;
+      margin: 20px 0;
+    }
+
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 16px;
+      margin: 5px;
+    }
+
+    .btn-toggle {
+      background: #3b82f6;
+      color: white;
+    }
+
+    .btn-print {
+      background: #10b981;
+      color: white;
+    }
+
+    /* فصل الصفحات عند الطباعة */
+    .page {
+      page-break-after: always;
+    }
+
+    @media print {
+      .actions {
+        display: none;
+      }
+    }
+    
+    
+    .signature-box {
+      text-align: center;
+      margin-top: 40px;
+    }
+    
+    .signature-box img.stamp {
+      width: 150px;       /* حجم الختم */
+      opacity: 0.85;      /* شفافية خفيفة */
+      margin-top: 10px;
+      filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.3)); /* ظل ناعم */
+    }
+    
+    .signature-box p {
+      margin: 0;
+      font-weight: bold;
+    }
+    
+    
+    .signature-box img.stamp {
+      width: 200px;
+      height: auto;
+      opacity: 0.9;
+      display: block;
+      margin: 10px auto;
+      border: none;
+    }
+    
+    
+    
+  </style>
+</head>
+<body class="light">
+  <div class="actions">
+    <button class="btn-toggle" onclick="toggleMode()">🌙/☀️ تبديل الوضع</button>
+    <button class="btn-print" onclick="window.print()">🖨️ طباعة</button>
+  </div>
+
+  <!-- صفحة الفاتورة -->
+  <div class="invoice-box page" id="invoice">
+    <h1>فاتورة رسمية</h1>
+    <div id="company-info"></div>
+    <div id="client-info"></div>
+    <div id="invoice-info"></div>
+
+    <h3>تفاصيل الفاتورة</h3>
+    <table id="items-table">
+      <thead>
+        <tr>
+          <th>الوصف</th>
+          <th>الكمية</th>
+          <th>سعر الوحدة</th>
+          <th>المجموع</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+    <h2 class="total" id="total"></h2>
+  </div>
+
+  <!-- صفحة الطلب الخطي -->
+  <div class="transfer-box page" id="transfer-request"></div>
+
+  <script>
+    // التبديل بين الوضع الليلي والفاتح
+    function toggleMode() {
+      document.body.classList.toggle("dark");
+      document.body.classList.toggle("light");
+    }
+
+    // تحميل بيانات الفاتورة
+    async function loadInvoice() {
+      const res = await fetch("i_facture_0_i.json");
+      const data = await res.json();
+
+      // بيانات الشركة
+      document.getElementById("company-info").innerHTML = `
+        <h2>${data.company.name}</h2>
+        <p>${data.company.address}</p>
+        <p>📞 ${data.company.phone} | ✉️ ${data.company.email}</p>
+      `;
+
+      // بيانات العميل
+      document.getElementById("client-info").innerHTML = `
+        <h3>العميل:</h3>
+        <p><b>${data.client.name}</b></p>
+        <p>${data.client.address}</p>
+      `;
+
+      // بيانات الفاتورة
+      document.getElementById("invoice-info").innerHTML = `
+        <p><b>رقم الفاتورة:</b> ${data.invoice_number}</p>
+        <p><b>التاريخ:</b> ${data.date}</p>
+      `;
+
+      // تعبئة الجدول
+      const tbody = document.querySelector("#items-table tbody");
+      tbody.innerHTML = "";
+      let total = 0;
+      data.items.forEach(item => {
+        const row = document.createElement("tr");
+        const subtotal = item.quantity * item.unit_price;
+        total += subtotal;
+        row.innerHTML = `
+          <td>${item.description}</td>
+          <td>${item.quantity}</td>
+          <td>${item.unit_price} ${data.currency}</td>
+          <td>${subtotal} ${data.currency}</td>
+        `;
+        tbody.appendChild(row);
+      });
+
+      document.getElementById("total").textContent = `الإجمالي: ${total} ${data.currency}`;
+
+      
+      
+        // طلب التحويل
+          
+        const tr = data.transfer_request;
+        if (tr) {
+            const totalTarget = total;
+            const totalSource = totalTarget * tr.exchange_rate;
+        
+            document.getElementById("transfer-request").innerHTML = `
+                  
+                  <h1>الجمهورية الجزائرية الديموقراطية الشعبية</h1>
+                  <h1>البنك الوطني الجزائري</h1>
+                  <h1>طلب خطي لتحويل العملة</h1>
+        
+                  <p>إلى السيد/السادة المحترمين،</p>
+        
+                  <p>
+                    أرجو من سيادتكم القيام بتحويل مبلغ 
+                    <b>${totalSource.toFixed(2)} ${tr.from_currency}</b> 
+                    إلى ما يعادلها 
+                    <b>${totalTarget.toFixed(2)} ${tr.to_currency}</b>
+                    وذلك بغرض <b>${tr.reason}</b>.
+                  </p>
+        
+                  <p>
+                    من حساب رقم RIB: <b>${tr.from_rib}</b><br>
+                    إلى حساب رقم RIB: <b>${tr.to_rib}</b>
+                  </p>
+        
+                  <p>
+                    إذا لم يكن المبلغ متاحا فيتم تحويل كل المبلغ الموجود في الحساب.
+                  </p>
+        
+                  <p>وتفضلوا بقبول فائق الاحترام.</p>
+        
+                  <p>أنا الممضي أسفله : بلال دبوسي</p>
+        
+                  <div class="signature-box">
+                    <p><b>بلال دبوسي</b><br>شركة الإعلام الآلي</p>
+                  </div>
+            `;
+        }
+        
+      
+      
+      
+      
+      
+      
+    }
+
+    loadInvoice();
+  </script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
